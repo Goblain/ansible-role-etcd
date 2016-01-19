@@ -17,11 +17,9 @@
 - copy: src=/opt/etcd/etcd-v{{version}}-linux-amd64/etcdctl dest=/usr/sbin/etcdctl-{{version}} mode=774 owner=root group=root
   when: etcd.stat.exists == False
 
-- file: src=/usr/sbin/etcd dest=/usr/sbin/etcd-{{version}} mode=774 owner=root group=root
-  when: etcd.stat.exists == False
+- file: src=/usr/sbin/etcd-{{version}} dest=/usr/sbin/etcd mode=774 owner=root group=root state=link
 
-- file: src=/usr/sbin/etcdctl dest=/usr/sbin/etcdctl-{{version}} mode=774 owner=root group=root
-  when: etcd.stat.exists == False
+- file: src=/usr/sbin/etcdctl-{{version}} dest=/usr/sbin/etcdctl mode=774 owner=root group=root state=link
 
 - file: path=/opt/etcd-v{{version}}-linux-amd64.tar.gz state=absent
 
